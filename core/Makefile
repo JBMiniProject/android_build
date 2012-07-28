@@ -1265,7 +1265,7 @@ ifneq ($(recovery_fstab),)
 #endif
 #name := $(name)-ota-$(FILE_NAME_TAG)
 
-name := JB_$(PRODUCT_DEVICE)_xxx
+name := JB_$(PRODUCT_MODEL)_xxx
 
 INTERNAL_OTA_PACKAGE_TARGET := $(name).zip
 
