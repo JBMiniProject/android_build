@@ -22,6 +22,8 @@ endif
 #  FILE_NAME_TAG := $(BUILD_NUMBER)
 #endif
 
+  FILE_NAME_TAG := v$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(PRODUCT_BUILDTYPE)_$(PRODUCT_VERSION_DEVICE_SPECIFIC)
+
 is_tests_build := $(filter tests,$(MAKECMDGOALS))
 
 # -----------------------------------------------------------------
@@ -1265,7 +1267,7 @@ ifneq ($(recovery_fstab),)
 #endif
 #name := $(name)-ota-$(FILE_NAME_TAG)
 
-name := JB_$(PRODUCT_MODEL)_xxx
+name := $(PRODUCT_MODEL)_JBMP_$(FILE_NAME_TAG)
 
 INTERNAL_OTA_PACKAGE_TARGET := $(name).zip
 
