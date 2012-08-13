@@ -441,6 +441,7 @@ GRANDFATHERED_USER_MODULES += \
 	resize2fs \
 	resize2fs_host \
 	rgb2565 \
+	rild \
 	rsg-generator \
 	run-as \
 	runtime \
