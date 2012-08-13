@@ -59,17 +59,14 @@ function check_product()
         return
     fi
 
-    if (echo -n $1 | grep -q -e "^cm_") ; then
-       CM_BUILD=$(echo -n $1 | sed -e 's/^cm_//g')
-       NAM_VARIANT=$(echo -n $1 | sed -e 's/^cm_//g')
-    elif (echo -n $1 | grep -q -e "htc_") ; then
-       CM_BUILD=
-       NAM_VARIANT=$(echo -n $1)
-    else 
-       CM_BUILD=
+    if (echo -n $1 | grep -q -e "^jbmp_") ; then
+       JBMP_BUILD=$(echo -n $1 | sed -e 's/^jbmp_//g')
+       NAM_VARIANT=$(echo -n $1 | sed -e 's/^jbmp_//g')
+    else
+       JBMP_BUILD=
        NAM_VARIANT=
     fi
-    export CM_BUILD
+    export JBMP_BUILD
     export NAM_VARIANT
 
     CALLED_FROM_SETUP=true BUILD_SYSTEM=build/core \
@@ -508,7 +505,7 @@ function breakfast()
             lunch $target
         else
             # This is probably just the CM model name
-            lunch cm_$target-userdebug
+            lunch jbmp_$target-userdebug
         fi
     fi
     return $?
