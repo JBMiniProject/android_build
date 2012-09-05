@@ -644,7 +644,7 @@ else
 endif
 
 ifeq ($(recovery_resources_private),)
-    ifeq($(ALL_WARNINGS),true)
+    ifeq ($(ALL_WARNINGS),true)
         $(info No private recovery resources for TARGET_DEVICE $(TARGET_DEVICE))
     endif
 endif

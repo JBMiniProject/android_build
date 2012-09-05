@@ -41,7 +41,7 @@ ifeq "$(wildcard $(KERNEL_SRC) )" ""
     endif
 
     ifneq ($(HAS_PREBUILT_KERNEL),)
-        ifeq($(ALL_WARNINGS),true)
+        ifeq ($(ALL_WARNINGS),true)
             $(warning ***************************************************************)
             $(warning * Using prebuilt kernel binary instead of source              *)
             $(warning * THIS IS DEPRECATED, AND WILL BE DISCONTINUED                *)
