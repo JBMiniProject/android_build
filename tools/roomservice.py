@@ -123,8 +123,7 @@ def add_to_manifest(repositories):
     f.close()
 
 def fetch_dependencies(repo_path):
-    print 'Looking for dependencies'
-    dependencies_path = repo_path + '/cm.dependencies'
+    dependencies_path = repo_path + '/jbmp.dependencies'
     syncable_repos = []
 
     if os.path.exists(dependencies_path):
@@ -142,8 +141,6 @@ def fetch_dependencies(repo_path):
         if len(fetch_list) > 0:
             print 'Adding dependencies to manifest'
             add_to_manifest(fetch_list)
-    else:
-        print 'Dependencies file not found, bailing out.'
 
     if len(syncable_repos) > 0:
         print 'Syncing dependencies'
