@@ -2,8 +2,7 @@
 
 echo "# Jelly Bean Mini Project"
 echo "# begin build properties"
-echo " "
-
+echo ""
 echo "ro.build.id=$BUILD_ID"
 echo "ro.build.display.id=$BUILD_DISPLAY_ID"
 echo "ro.build.version.incremental=$BUILD_NUMBER"
@@ -35,13 +34,9 @@ if [ -n "$PRODUCT_DEFAULT_REGION" ] ; then
 fi
 echo "ro.wifi.channels=$PRODUCT_DEFAULT_WIFI_CHANNELS"
 echo "ro.board.platform=$TARGET_BOARD_PLATFORM"
-
-echo "# ro.build.product is obsolete; use ro.product.device"
 echo "ro.build.product=$TARGET_DEVICE"
-
-echo "# Do not try to parse ro.build.description or .fingerprint"
 echo "ro.build.description=$PRIVATE_BUILD_DESC"
 echo "ro.build.fingerprint=$BUILD_FINGERPRINT"
 echo "ro.build.characteristics=$TARGET_AAPT_CHARACTERISTICS"
-
 echo "# end build properties"
+echo ""
