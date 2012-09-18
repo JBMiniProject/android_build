@@ -14,6 +14,7 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - cmremote: Add git remote for CM Gerrit Review
 - cmgerrit: A Git wrapper that fetches/pushes patch from/to CM Gerrit Review
 - cmrebase: Rebase a Gerrit change and push it again
+- aospremote: Add git remote for matching AOSP repository
 - mka:      Builds using SCHED_BATCH on all processors
 - reposync: Parallel repo sync using ionice and SCHED_BATCH
 
@@ -1292,6 +1293,23 @@ function cmremote()
 }
 export -f cmremote
 
+function aospremote()
+{
+    git remote rm aosp 2> /dev/null
+    if [ ! -d .git ]
+    then
+        echo .git directory not found. Please run this from the root directory of the Android repository you wish to set up.
+    fi
+    PROJECT=`pwd | sed s#$ANDROID_BUILD_TOP/##g`
+    if (echo $PROJECT | grep -qv "^device")
+    then
+        PFX="platform/"
+    fi
+    git remote add aosp https://android.googlesource.com/$PFX$PROJECT
+    echo "Remote 'aosp' created"
+}
+export -f aospremote
+
 function makerecipe() {
   if [ -z "$1" ]
   then
@@ -1612,7 +1630,7 @@ function reposync() {
             repo sync -j 4 "$@"
             ;;
         *)
-            schedtool -B -n 1 -e ionice -n 1 repo sync -j 4 "$@"
+            schedtool -B -n 1 -e ionice -n 1 `which repo` sync -j 4 "$@"
             ;;
     esac
 }
