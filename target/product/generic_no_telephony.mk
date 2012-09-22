@@ -31,7 +31,6 @@ PRODUCT_PACKAGES := \
     LatinIME \
     Music \
     Phone \
-    QuickSearchBox \
     Settings \
     SystemUI \
     CalendarProvider \
