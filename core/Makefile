@@ -1,9 +1,6 @@
 # Put some miscellaneous rules here
 
 # Build system colors
-#
-# PFX: Prefix "target C++:" in yellow
-# INS: Module "Install:" output color (cyan for ics)
 
 ifneq ($(BUILD_WITH_COLORS),0)
   CL_RED="\033[31m"
@@ -540,7 +537,7 @@ endif
 $(kernel_notice_file): \
 	    prebuilts/qemu-kernel/arm/LINUX_KERNEL_COPYING \
 	    | $(ACP)
-	@echo Copying: $@
+	@echo -e ${CL_CYN}"Copying:"${CL_RST}" $@"
 	$(hide) mkdir -p $(dir $@)
 	$(hide) $(ACP) $< $@
 
@@ -1393,7 +1390,7 @@ $(BUILT_TESTS_ZIP_PACKAGE): zip_root := $(intermediates)/$(name)
 $(BUILT_TESTS_ZIP_PACKAGE): \
     $(INSTALLED_USERDATAIMAGE_TARGET) \
     | $(ACP)
-	@echo "Package test files: $@"
+	@echo -e ${CL_YLW}"Package test files:"${CL_RST} $@"
 	$(hide) rm -rf $@ $(zip_root)
 	$(hide) mkdir -p $(dir $@) $(zip_root)
 	@# Contents of the data image

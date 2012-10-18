@@ -1077,7 +1077,7 @@ endef
 
 # $(1): the full path of the source static library.
 define _extract-and-include-single-target-whole-static-lib
-@echo "preparing StaticLib: $(PRIVATE_MODULE) [including $(1)]"
+@echo -e ${CL_YLW}"preparing StaticLib:"${CL_RST}" $(PRIVATE_MODULE) [including $(1)]"
 $(hide) ldir=$(PRIVATE_INTERMEDIATES_DIR)/WHOLE/$(basename $(notdir $(1)))_objs;\
     rm -rf $$ldir; \
     mkdir -p $$ldir; \
@@ -1111,7 +1111,7 @@ endef
 
 # $(1): the full path of the source static library.
 define _extract-and-include-single-host-whole-static-lib
-@echo "preparing StaticLib: $(PRIVATE_MODULE) [including $(1)]"
+@echo -e ${CL_YLW}"preparing StaticLib:"${CL_RST}" $(PRIVATE_MODULE) [including $(1)]"
 $(hide) ldir=$(PRIVATE_INTERMEDIATES_DIR)/WHOLE/$(basename $(notdir $(1)))_objs;\
     rm -rf $$ldir; \
     mkdir -p $$ldir; \
@@ -1501,7 +1501,7 @@ $(hide) if [ -e $(PRIVATE_CLASS_INTERMEDIATES_DIR)/stamp ] ; then \
     fi
 $(hide) tr ' ' '\n' < $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list \
     | sort -u > $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list-uniq
-@echo "(Incremental) build source files:"
+@echo -e ${CL_YLW}"(Incremental) build source files:"${CL_RST}""
 @cat $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list-uniq
 $(hide) if [ -s $(PRIVATE_CLASS_INTERMEDIATES_DIR)/java-source-list-uniq ] ; then \
     $(1) -encoding UTF-8 \
@@ -1659,7 +1659,7 @@ endef
 # Note: we intentionally don't clean PRIVATE_CLASS_INTERMEDIATES_DIR
 # in transform-java-to-classes for the sake of vm-tests.
 define transform-host-java-to-package
-@echo "host Java: $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
+@echo -e ${CL_YLW}"host Java:"${CL_RST}" $(PRIVATE_MODULE) ($(PRIVATE_CLASS_INTERMEDIATES_DIR))"
 $(call compile-java,$(HOST_JAVAC),$(PRIVATE_BOOTCLASSPATH))
 $(if $(PRIVATE_EXTRA_JAR_ARGS), $(call add-java-resources-to-package))
 endef
@@ -1673,7 +1673,7 @@ endef
 # The module using this must depend on
 #        $(HOST_OUT_JAVA_LIBRARIES)/proguard-4.0.1.jar
 define obfuscate-jar
-@echo "Obfuscate jar: $(notdir $@) ($@)"
+@echo -e ${CL_GRN}"Obfuscate jar:"${CL_RST}" $(notdir $@) ($@)"
 @mkdir -p $(dir $@)
 @rm -f $@
 @mkdir -p $(PRIVATE_INTERMEDIATES_DIR)
@@ -1702,7 +1702,7 @@ endef
 # $(2): destination header
 define copy-one-header
 $(2): $(1)
-	@echo "Header: $$@"
+	@echo -e ${CL_YLW}"Header:"${CL_RST}" $$@"
 	$$(copy-file-to-new-target-with-cp)
 endef
 
@@ -1711,7 +1711,7 @@ endef
 # $(2): destination file
 define copy-one-file
 $(2): $(1) | $(ACP)
-	@echo "Copy: $$@"
+	@echo -e ${CL_YLW}"Copy:"${CL_RST}" $$@"
 	$$(copy-file-to-target)
 endef
 
@@ -1720,7 +1720,7 @@ endef
 # $(2): destination file, must end with .xml.
 define copy-xml-file-checked
 $(2): $(1) | $(ACP)
-	@echo "Copy xml: $$@"
+	@echo -e ${CL_YLW}"Copy xml:"${CL_RST}" $$@"
 	$(hide) xmllint $$< >/dev/null  # Don't print the xml file to stdout.
 	$$(copy-file-to-target)
 endef
@@ -1778,19 +1778,19 @@ endef
 
 # Copy a prebuilt file to a target location.
 define transform-prebuilt-to-target
-@echo "$(if $(PRIVATE_IS_HOST_MODULE),host,target) Prebuilt: $(PRIVATE_MODULE) ($@)"
+@echo -e "$(if $(PRIVATE_IS_HOST_MODULE),host,target) "${CL_CYN}"Prebuilt:"${CL_RST}" $(PRIVATE_MODULE) ($@)"
 $(copy-file-to-target)
 endef
 
 # Copy a prebuilt file to a target location, using zipalign on it.
 define transform-prebuilt-to-target-with-zipalign
-@echo "$(if $(PRIVATE_IS_HOST_MODULE),host,target) Prebuilt APK: $(PRIVATE_MODULE) ($@)"
+@echo "$(if $(PRIVATE_IS_HOST_MODULE),host,target) "${CL_CYN}"Prebuilt APK:"${CL_RST}" $(PRIVATE_MODULE) ($@)"
 $(copy-file-to-target-with-zipalign)
 endef
 
 # Copy a prebuilt file to a target location, stripping "# comment" comments.
 define transform-prebuilt-to-target-strip-comments
-@echo "$(if $(PRIVATE_IS_HOST_MODULE),host,target) Prebuilt: $(PRIVATE_MODULE) ($@)"
+@echo "$(if $(PRIVATE_IS_HOST_MODULE),host,target) "${CL_CYN}"Prebuilt:"${CL_RST}" $(PRIVATE_MODULE) ($@)"
 $(copy-file-to-target-strip-comments)
 endef
 
@@ -1827,14 +1827,14 @@ endif
 
 # Command to copy the file with acp, if proguard is disabled.
 define proguard-disabled-commands
-@echo Copying: $@
+@echo -e ${CL_CYN}"Copying:"${CL_RST}" $@"
 $(hide) $(ACP) -fp $< $@
 endef
 
 # Command to call Proguard
 # $(1): extra flags for instrumentation.
 define proguard-enabled-commands
-@echo Proguard: $@
+@echo -e ${CL_GRN}"Proguard:"${CL_RST}" $@"
 $(hide) $(PROGUARD) -injars $< -outjars $@ $(PRIVATE_PROGUARD_FLAGS) $(1)
 endef
 
