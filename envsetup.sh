@@ -491,7 +491,7 @@ function breakfast()
     JBMP_DEVICES_ONLY="true"
     unset LUNCH_MENU_CHOICES
     add_lunch_combo full-eng
-    for f in `/bin/ls vendor/cm/vendorsetup.sh 2> /dev/null`
+    for f in `/bin/ls vendor/jbmp/vendorsetup.sh 2> /dev/null`
         do
             echo "including $f"
             . $f
@@ -1789,7 +1789,7 @@ fi
 # Execute the contents of any vendorsetup.sh files we can find.
 # for f in `/bin/ls vendor/*/vendorsetup.sh vendor/*/*/vendorsetup.sh device/*/*/vendorsetup.sh 2> /dev/null`
 
-for f in `/bin/ls device/*/*/vendorsetup.sh 2> /dev/null`
+for f in `/bin/ls vendor/jbmp/vendorsetup.sh device/*/*/vendorsetup.sh 2> /dev/null`
 do
     echo "including $f"
     . $f
