@@ -189,7 +189,6 @@ GRANDFATHERED_USER_MODULES += \
 	libbluetooth \
 	libbluetoothd \
 	libbuiltinplugin \
-	libbundlewrapper \
 	libbz \
 	libc \
 	libcamera_client \
