@@ -29,7 +29,6 @@ PRODUCT_PACKAGES := \
     Gallery2 \
     InputDevices \
     LatinIME \
-    Music \
     Phone \
     Settings \
     SystemUI \
